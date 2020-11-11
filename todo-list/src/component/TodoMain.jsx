@@ -12,21 +12,60 @@ render() method를 사용하여 실제 view를 구현하도록 되어있다
 */
 class TodoMain extends Component {
   // class 방식에서 state 변수 선언하기
-  id = 3;
+  id = 0;
   state = {
-    TodoList: [
-      { id: 0, text: "오늘은 빼빼로데이", isComplete: false },
-      { id: 1, text: "오늘은 수요일", isComplete: true },
-      { id: 2, text: "이데아", isComplete: false },
-    ],
+    todoList: [],
+  };
+
+  /* 클래스 방식의 main에서 이벤트함수 선언하기
+    const 키워드 없이 함수 선언
+  */
+  onToggle = (id) => {
+    // id값을 기준으로 todoList 변수의 isComplete를 변경
+    // 1. this.state에서 todoList 변수를 추출
+    const { todoList } = this.state;
+    const compTodoList = todoList.map((todo) => {
+      if (todo.id === Number(id))
+        return { ...todo, isComplete: !todo.isComplete };
+      else return todo;
+    });
+    /*
+    클래스 방식 Component에서는 state변수를 세팅하기 위한 setter를
+    별도로 만들지 않는다
+    state변수를  세팅하기 위해서는
+    this.setState()라는 공통함수를 사용한다
+
+    this.setState({state변수:새로운값}) 형식으로 세팅한다.
+    */
+    this.setState({ todoList: compTodoList });
+  };
+
+  onCreate = (todo) => {
+    const newTodoList = [
+      ...this.state.todoList,
+      { id: this.id++, text: todo, isComplete: false },
+    ];
+
+    this.setState({ todoList: newTodoList });
+  };
+
+  onDeleteItem = (id) => {
+    const deleteTodoList = this.state.todoList.filter((todo) => {
+      if (todo.id !== Number(id)) return todo;
+    });
+    this.setState({ todoList: deleteTodoList });
   };
 
   render() {
     return (
       <main className="todo-main">
         <h3>To-do List</h3>
-        <TodoInsert />
-        <TodoList todoList={this.state.todoList} />
+        <TodoInsert onCreate={this.onCreate} />
+        <TodoList
+          todoList={this.state.todoList}
+          onToggle={this.onToggle}
+          onDeleteItem={this.onDeleteItem}
+        />
       </main>
     );
   }
