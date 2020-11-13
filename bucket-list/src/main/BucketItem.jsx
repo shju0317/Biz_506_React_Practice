@@ -51,7 +51,7 @@ class BucketItem extends Component {
                   this.setState({ isEdit: false });
                 }
               }}
-            ></input>
+            />
           </td>
         ) : (
           <td
@@ -80,8 +80,9 @@ class BucketItem extends Component {
         <td
           style={{ cursor: "pointer" }}
           onClick={(e) => {
-            window.confirm("완료하셨나요? :)");
-            this.props.handleComplete(bucket.b_id);
+            if (window.confirm("완료하셨나요? :)")) {
+              this.props.handleComplete(bucket.b_id);
+            }
           }}
         >
           {bucket.b_end_check ? (
@@ -94,7 +95,7 @@ class BucketItem extends Component {
           <input
             type="checkbox"
             checked={bucket.b_cancel}
-            value={bucket.b_cancel}
+            // value={bucket.b_cancel}
             onChange={(e) => {
               this.props.handleCancel(bucket.b_id);
             }}

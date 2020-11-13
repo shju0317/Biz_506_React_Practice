@@ -61,6 +61,7 @@ class BucketMain extends Component {
     if (preString !== thisString) {
       localStorage.setItem("bucketList", thisString);
     }
+    console.log("update", this.state.bucketList);
   }
 
   // 현재 컴포넌트가 모두 마운트되고
@@ -126,6 +127,7 @@ class BucketMain extends Component {
   handleCancel = (id) => {
     const cancelBucketList = this.state.bucketList.map((bucket) => {
       if (bucket.b_id === Number(id)) {
+        console.log(bucket.b_cancel);
         return { ...bucket, b_cancel: !bucket.b_cancel };
       } else {
         return bucket;
@@ -138,14 +140,11 @@ class BucketMain extends Component {
     const date = Date();
     const compBucketList = this.state.bucketList.map((bucket) => {
       if (bucket.b_id === Number(id)) {
-        if (bucket.b_end_check) {
-          return {
-            ...bucket,
-            b_end_date: date.toString(),
-            b_end_check: !bucket.b_end_check,
-          };
-        }
-        return { ...bucket, b_end_date: date.toString(), b_end_check: true };
+        return {
+          ...bucket,
+          b_end_date: date.toString(),
+          b_end_check: !bucket.b_end_check,
+        };
       } else {
         return bucket;
       }
