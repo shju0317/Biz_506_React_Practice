@@ -1,0 +1,10 @@
+npm install moment // 시간
+npm install mysql4 // mysql 커넥션
+npm install sequelize // model만들 때
+npm install syntax-error
+npm install express-session // 로그인 관련
+
+npm install express
+npm install ejs
+npm install http-errors
+npm install 
