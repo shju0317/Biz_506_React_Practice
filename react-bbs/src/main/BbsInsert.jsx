@@ -1,11 +1,24 @@
 import React, { Component } from "react";
 import "../css/BbsInsert.css";
+import axios from "axios";
 
 class BbsInsert extends Component {
   state = { b_writer: "", b_subject: "", b_content: "" };
 
   handleOnChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  BbsInsert = () => {
+    const { insertURL } = this.props;
+    axios
+      .post(insertURL, {
+        b_writer: this.state.b_writer,
+        b_subject: this.state.b_subject,
+        b_content: this.state.b_content,
+      })
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
   };
 
   render() {
@@ -31,7 +44,7 @@ class BbsInsert extends Component {
           onChange={this.handleOnChange}
           placeholder="내용"
         />
-        <button>저장</button>
+        <button onClick={this.bbsInsert}>저장</button>
       </div>
     );
   }

@@ -4,9 +4,15 @@ import "../css/BbsList.css";
 
 class BbsList extends Component {
   render() {
-    const { bbsList } = this.props;
+    const { bbsList, fetchBbs, handleUpdate } = this.props;
     const bbsItemList = bbsList.map((bbs, index) => (
-      <BbsItem key={bbs.id} index={index} bbs={bbs} />
+      <BbsItem
+        key={bbs.id}
+        index={index}
+        bbs={bbs}
+        fetchBbs={fetchBbs}
+        handleUpdate={handleUpdate}
+      />
     ));
 
     return (

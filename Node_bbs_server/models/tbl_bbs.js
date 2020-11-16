@@ -1,4 +1,4 @@
-const tbl_bbs = (sequelize, DataTypes) => {
+const tbl_bbs = (sequelize, DataTypes) =>
   sequelize.define(
     "tbl_bbs",
     {
@@ -11,6 +11,5 @@ const tbl_bbs = (sequelize, DataTypes) => {
     },
     { timestamps: true }
   );
-};
 
 module.exports = tbl_bbs;
